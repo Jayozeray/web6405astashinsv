@@ -1,0 +1,66 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1a1a1a;
+    color: #eee;
+}
+
+/* Контейнер для заголовка и описания */
+.container {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* Заголовок */
+h1 {
+    font-size: 3em;
+    margin: 0.5em 0;
+    color: #ffffff;
+}
+
+/* Описание - выравнивание текста по ширине */
+p {
+    font-size: 1.2em;
+    color: #ddd;
+    text-align: justify;
+}
+
+/* Ссылки на страницы */
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.links a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+/* Стиль для активной ссылки */
+.links a.active {
+    color: #28a745;
+    pointer-events: none; /* Отключаем возможность клика на активную ссылку */
+}
+
+.links a:hover {
+    color: #0056b3;
+}
+
+/* Разделитель */
+.links span {
+    color: #aaa;
+    font-size: 1.1em;
+}

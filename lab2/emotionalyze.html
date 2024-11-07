@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotionalyze</title>
+    <link rel="stylesheet" href="style_emotionalyze.css">
+</head>
+<body>
+<!-- Ссылки в верхнем левом углу -->
+<div class="links">
+    <a href="home.html">Home Page</a>
+    <span>|</span>
+    <a href="emotionalyze.html" class="active">Emotionalyze</a>
+    <span>|</span>
+    <a href="accuracy.html">Accuracy</a>
+</div>
+
+<!-- Основной контейнер для двух частей -->
+<div class="container">
+    <!-- Левая часть: загрузка файлов -->
+    <div class="upload-section">
+        <div class="upload-box">
+            <label for="video-upload" class="upload-btn">Upload</label>
+            <input type="file" id="video-upload" style="display: none;">
+            <label>Select video for analysis</label>
+        </div>
+        <div class="preview-box">Preview video area</div>
+
+        <div class="upload-box">
+            <label for="rem-upload" class="upload-btn">Upload</label>
+            <input type="file" id="rem-upload" style="display: none;">
+            <label>Select REM</label>
+        </div>
+        <div class="file-list">List of uploaded files</div>
+
+        <button class="analyze-btn">Analyze</button>
+    </div>
+
+    <!-- Правая часть: вывод результатов -->
+    <div class="result-section">
+        <h2 class="result-title">Result</h2>
+        <div class="result-box">Area for graph</div>
+        <div class="result-box">Text verdict area</div>
+        <button class="download-btn">Download result EM</button>
+    </div>
+</div>
+</body>
+</html>
