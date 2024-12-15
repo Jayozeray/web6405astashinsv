@@ -1,6 +1,14 @@
 # web6405astashinsv
 
-  ![image](https://github.com/user-attachments/assets/85a7b9fa-afce-4c55-8a03-f15a315c82ab)
+  ![image](https://github.com/user-attachments/assets/85a7b9fa-afce-4c55-8a03-f15a315c82ab)  
+  
+  
+  
+![image](https://github.com/user-attachments/assets/66db19a7-25a8-42c8-a1d5-336dab0ebbdd)
+  
+ЛР2 - тестовый каркас для научной работы с её описанием
+3 страницы, 1 картинка, 3 таблицы, 3 ссылки
+
 
 Асташин Сергей Владиславович  
 6405-010302D  
