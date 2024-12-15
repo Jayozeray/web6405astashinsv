@@ -1,45 +1,50 @@
 /* Общие стили */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
     background-color: #1a1a1a;
     color: #eee;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Контейнер для заголовка и описания */
+/* Основной контент по центру */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем по горизонтали */
+    justify-content: center;
+    flex: 1;
+    margin-bottom: 100px;
+}
+
 .container {
     text-align: center;
     max-width: 800px;
     padding: 20px;
+    margin: 0 auto;
 }
 
-/* Заголовок */
 h1 {
     font-size: 3em;
     margin: 0.5em 0;
     color: #ffffff;
 }
 
-/* Описание - выравнивание текста по ширине */
 p {
     font-size: 1.2em;
     color: #ddd;
     text-align: justify;
+    margin-bottom: 30px;
 }
 
-/* Ссылки на страницы */
 .links {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-top: 30px;
 }
 
 .links a {
@@ -49,18 +54,177 @@ p {
     transition: color 0.3s;
 }
 
-/* Стиль для активной ссылки */
 .links a.active {
     color: #28a745;
-    pointer-events: none; /* Отключаем возможность клика на активную ссылку */
+    pointer-events: none;
 }
 
 .links a:hover {
     color: #0056b3;
 }
 
-/* Разделитель */
 .links span {
     color: #aaa;
     font-size: 1.1em;
+}
+
+.top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Выравнивание содержимого по правому краю */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Переключатель снега */
+.snow-toggle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#snow-toggle {
+    display: none;
+}
+
+.toggle-label {
+    width: 50px;
+    height: 25px;
+    background: #555;
+    border-radius: 25px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    vertical-align: middle;
+}
+
+.toggle-label:after {
+    content: "";
+    width: 23px;
+    height: 23px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: transform 0.3s;
+}
+
+#snow-toggle:checked + .toggle-label {
+    background: #28a745;
+}
+
+#snow-toggle:checked + .toggle-label:after {
+    transform: translateX(25px);
+}
+
+.snow-label {
+    text-align: center;
+    color: #eee;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+/* Контейнер для снежинок */
+.snow {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Снежинка */
+.flake {
+    position: absolute;
+    top: -50px;
+    width: 20px;
+    height: 20px;
+    background: url("images/snowflake.png") no-repeat center / contain;
+    animation-name: fallAndWiggle;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+/* Снежинки падают под углом с разным сдвигом */
+@keyframes fallAndWiggle {
+    0% {
+        transform: translateY(-50px) translateX(-10px);
+        opacity: 0.8;
+    }
+    30% {
+        transform: translateY(30vh) translateX(0);
+        opacity: 1;
+    }
+    60% {
+        transform: translateY(60vh) translateX(15px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(30px);
+        opacity: 0;
+    }
+}
+/* Форма внизу экрана */
+.bottom-form-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: #eee;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 200;
+    border-top: 2px solid #444;
+}
+
+.bottom-form-text {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #ddd;
+}
+
+/* Форма e-mail */
+.email-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.email-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+    width: 200px;
+    font-size: 1em;
+}
+
+.email-form button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.email-form button:hover {
+    background: #0056b3;
+}
+
+.error-message {
+    margin-top: 5px;
+    font-size: 0.9em;
+    min-height: 1em;
 }
