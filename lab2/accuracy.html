@@ -23,14 +23,14 @@
     <h1>MODEL ACCURACY</h1>
     <div class="tables-row">
       <!-- Левая таблица -->
-      <table class="table-left">
+      <table class="table-left" id="left-table">
         <tr>
           <th>Emotion</th>
           <th>Happiness</th>
         </tr>
         <tr>
           <td>Percentage</td>
-          <td>90</td>
+          <td id="happiness-percentage"><span class="loading-dots">Loading</span></td>
         </tr>
       </table>
 
@@ -70,5 +70,43 @@
     </figure>
   </section>
 </div>
+
+<script>
+  // Асинхронный запрос для получения данных с сервера
+  async function fetchTableData() {
+    const url = "https://api.example.com/happiness";
+    const happinessCell = document.getElementById("happiness-percentage");
+    const loadingDots = happinessCell.querySelector(".loading-dots");
+    try {
+      // Добавляем текст и класс загрузки
+      loadingDots.textContent = "Loading";
+      // Отправка GET-запроса на сервер, для fetch() по умолчанию GET
+      const response = await fetch(url);
+
+      // Проверяем успешность запроса
+      if (response.ok) {
+        // Обрабатываем данные ответа
+        const data = await response.json();
+        const happinessPercentage = data.happiness;
+
+        // Вставляем данные в таблицу
+        happinessCell.textContent = `${happinessPercentage}%`;
+      } else {
+        // Если сервер вернул ошибку, обрабатываем это здесь
+        console.error(`Server error: ${response.status}`);
+        happinessCell.textContent = "Server error";
+        happinessCell.style.color = "red";
+      }
+    } catch (error) {
+      // Обработка сетевых ошибок (например, если сервер недоступен)
+      console.error("Network error:", error);
+      happinessCell.textContent = "Error loading data";
+      happinessCell.style.color = "red";
+    }
+  }
+
+  // Вызываем функцию при загрузке страницы
+  document.addEventListener("DOMContentLoaded", fetchTableData);
+</script>
 </body>
 </html>

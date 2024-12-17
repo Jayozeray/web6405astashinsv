@@ -2,26 +2,133 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- адптация для мобильных -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница - Emotionalyze</title>
     <link rel="stylesheet" href="style_home.css">
 </head>
 <body>
-<section class="container">
-    <!-- Заголовок проекта -->
-    <h1>Emotionalyze</h1>
-
-    <!-- Описание проекта -->
-    <p>Цель разработки Emotionalyze – автоматизировать психологическое тестирование, анализируя эмоциональные реакции зрителя на специально созданный видеоряд и сравнивая их с эталонными картами эмоций, что позволит быстро и объективно выявлять ключевые эмоциональные паттерны и возможные отклонения.</p>
-</section>
-
-<!-- Ссылки на другие страницы -->
-<div class="links">
-    <a href="index.html" class="active">Home Page</a>
-    <span>|</span>
-    <a href="emotionalyze.html">Emotionalyze</a>
-    <span>|</span>
-    <a href="accuracy.html">Accuracy</a>
+<!-- Верхняя панель -->
+<div class="top-bar">
+    <div class="snow-toggle-container">
+        <input type="checkbox" id="snow-toggle">
+        <label for="snow-toggle" class="toggle-label"></label>
+        <div class="snow-label">Snow</div>
+        <div class="snow"></div>
+    </div>
 </div>
+
+<!-- Основной контент по центру -->
+<div class="main-content">
+    <section class="container">
+        <h1>Emotionalyze</h1>
+        <p>Цель разработки Emotionalyze – автоматизировать психологическое тестирование, анализируя эмоциональные реакции зрителя на специально созданный видеоряд и сравнивая их с эталонными картами эмоций, что позволит быстро и объективно выявлять ключевые эмоциональные паттерны и возможные отклонения.</p>
+    </section>
+
+    <div class="links">
+        <a href="index.html" class="active">Home Page</a>
+        <span>|</span>
+        <a href="emotionalyze.html">Emotionalyze</a>
+        <span>|</span>
+        <a href="accuracy.html">Accuracy</a>
+    </div>
+</div>
+
+<!-- Форма внизу экрана -->
+<div class="bottom-form-container">
+    <div class="bottom-form-text">Заинтересовала технология? Оставляйте свой e-mail!</div>
+    <form id="email-form" class="email-form">
+        <input type="text" id="email-input" name="email" placeholder="Введите ваш e-mail">
+        <button type="submit">Отправить</button>
+        <div class="error-message" id="error-message"></div>
+    </form>
+</div>
+<script>
+    const snowContainer = document.querySelector('.snow');
+    let snowInterval = null;
+
+    document.getElementById('snow-toggle').addEventListener('change', function() {
+        if (this.checked) {
+            // Включаем снег
+            snowInterval = setInterval(createFlake, 200);
+        } else {
+            // Выключаем снег - новые не появляются, старые падают дальше
+            clearInterval(snowInterval);
+        }
+    });
+
+    function createFlake() {
+        const flake = document.createElement('span');
+        flake.classList.add('flake');
+
+        // Случайная позиция по ширине
+        const screenWidth = window.innerWidth;
+        const leftPos = Math.random() * screenWidth;
+
+        // Прозрачность от 0.3 до 1 для эффекта глубины
+        const opacity = 0.3 + Math.random() * 0.7;
+
+        // Длительность падения от 6 до 11 секунд
+        const duration = 6 + Math.random() * 5;
+
+        flake.style.left = `${leftPos}px`;
+        flake.style.opacity = opacity;
+        flake.style.animationDuration = `${duration}s`;
+
+        snowContainer.appendChild(flake);
+
+        // Удаляем снежинку после завершения анимации
+        setTimeout(() => {
+            flake.remove();
+        }, (duration * 1000) + 1000);
+    }
+</script>
+
+<script>
+    const emailForm = document.getElementById('email-form');
+    const emailInput = document.getElementById('email-input');
+    const errorMessage = document.getElementById('error-message');
+
+    emailForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем стандартное поведение отправки формы
+
+        const emailValue = emailInput.value.trim();
+
+        // Простейшая проверка email с помощью регулярного выражения
+        const emailRegex = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
+
+        if (!emailRegex.test(emailValue)) {
+            errorMessage.textContent = "Некорректный адрес e-mail. Проверьте латинские буквы и формат.";
+            errorMessage.style.color = "red";
+            return;
+        }
+
+        // Если email корректен, выполняем POST-запрос (пример)
+        errorMessage.textContent = ""; // Очищаем ошибку
+
+        fetch('https://example.com/api/subscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: emailValue })
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Успешная отправка
+                    errorMessage.textContent = "Ваш e-mail успешно отправлен!";
+                    errorMessage.style.color = "green";
+                    emailInput.value = "";
+                } else {
+                    // Обработка ошибки, если сервер ответил не 200
+                    errorMessage.textContent = "Произошла ошибка при отправке. Попробуйте позже.";
+                    errorMessage.style.color = "red";
+                }
+            })
+            .catch(() => {
+                errorMessage.textContent = "Не удалось связаться с сервером. Попробуйте позже.";
+                errorMessage.style.color = "red";
+            });
+    });
+</script>
 </body>
 </html>
